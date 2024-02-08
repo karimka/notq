@@ -1,11 +1,11 @@
-<article class="post">
+<article class="post" itemscope itemtype="https://schema.org/BlogPosting" itemid="https://notq.ru/{{post['id']}}" >
     <header>
       <div class="votes">
         <a class="vote" id="uv{{post['id']}}" {% if post['id'] in upvoted %} style="color: #00a000" {% endif %} onclick="vote({{post['id']}},1,{{g.canVote}})" title="Больше такого">▲</a>
         <div id="nv{{post['id']}}">{{post['votes']}}</div>
         <a class="vote" id="dv{{post['id']}}" {% if post['id'] in downvoted %} style="color: #f00000" {% endif %} onclick="vote({{post['id']}},-1,{{g.canVote}})" title="Меньше такого">▼</a></div>
         <div class="middle">
-          <a href="{{ url_for('blog.one_post', id=post['id']) }}"><h1>{{ post['title'] }}</h1></a>
+          <a href="{{ url_for('blog.one_post', id=post['id']) }}"><h1 itemprop="name" >{{ post['title'] }}</h1></a>
         <div class="about">
           {% set userdata=post %}{% include 'user.html' %},
           {% if post['edited'] %}изменено {{ post['edited'] }}{% else %}{{ post['created'] }}{% endif %}
@@ -18,5 +18,5 @@
         <a class="action" href="{{ url_for('blog.update', id=post['id']) }}" title="Модерировать">Мод.</a>
       {% endif %}
     </header>
-    <p class="body">{{post['rendered']|safe}}</p>
+    <p class="body" itemprop="articleBody" >{{post['rendered']|safe}}</p>
 </article>
